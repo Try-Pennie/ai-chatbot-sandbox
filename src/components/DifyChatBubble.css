@@ -1,0 +1,82 @@
+.chat-bubble-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.chat-window {
+  position: fixed;
+  border: 1px solid #d9d9d9;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  user-select: none;
+  /* Default size if state fails */
+  width: 384px;
+  height: 600px; 
+}
+
+.chat-window-header {
+  height: 0; /* Hidden or minimal, we rely on internal header? 
+                The plan says "internal chat window header". 
+                The wrapper usually has no header if the iframe has one. 
+                But the example had a wrapper header "Dify Chat".
+                The screenshot shows the "Migo" header which looks like it belongs to the chat app.
+                I'll assume the iframe provides the header and I style it. 
+                So wrapper header can be hidden or minimal (just for drag/close). */
+  background-color: transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 20px; /* small strip for dragging */
+  z-index: 10;
+  cursor: grab;
+}
+
+.chat-window-content {
+  flex-grow: 1;
+  height: 100%;
+  width: 100%;
+}
+
+.chat-window-content iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.resize-handle {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background: transparent;
+  cursor: nwse-resize;
+  z-index: 20;
+}
+
+.resize-handle.top-left {
+  top: 0;
+  left: 0;
+}
+
+/* Custom Button Styles */
+.migo-custom-button {
+    background: linear-gradient(135deg, #a855f7, #3b82f6) !important;
+    box-shadow: 0 4px 14px 0 rgba(168, 85, 247, 0.39) !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+}
+
+.migo-custom-button img {
+    width: 60%;
+    height: auto;
+    object-fit: contain;
+}
+
