@@ -1,0 +1,37 @@
+.chat-error-fallback {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  background: white;
+  border: 1px solid #ff4d4f;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 4px 12px rgba(255, 77, 79, 0.2);
+  max-width: 300px;
+  z-index: 999;
+}
+
+.chat-error-fallback p {
+  margin: 0 0 12px 0;
+  color: #262626;
+  font-size: 14px;
+}
+
+.chat-error-fallback button {
+  background: linear-gradient(135deg, #a855f7, #3b82f6);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: opacity 0.2s;
+}
+
+.chat-error-fallback button:hover {
+  opacity: 0.9;
+}
+
+.chat-error-fallback button:active {
+  transform: scale(0.98);
+}

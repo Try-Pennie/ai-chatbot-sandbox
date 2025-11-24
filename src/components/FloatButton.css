@@ -1,0 +1,38 @@
+.float-button {
+  position: relative;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  outline: none;
+}
+
+.float-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px 0 rgba(168, 85, 247, 0.5) !important;
+}
+
+.float-button:active {
+  transform: scale(0.95);
+}
+
+.float-button:focus-visible {
+  outline: 2px solid #a855f7;
+  outline-offset: 2px;
+}
+
+/* Maintain existing custom button styles */
+.float-button.migo-custom-button {
+  background: linear-gradient(135deg, #a855f7, #3b82f6) !important;
+  box-shadow: 0 4px 14px 0 rgba(168, 85, 247, 0.39) !important;
+}
+
+.float-button.migo-custom-button img {
+  width: 60%;
+  height: auto;
+  object-fit: contain;
+}

@@ -2,15 +2,13 @@ const { createProxyMiddleware } = require('http-proxy-middleware');
 
 module.exports = function(app) {
   app.use(
-    ['/api', '/_next', '/logo', '/console', '/favicon.ico', '/chat'],
+    ['/api', '/_next', '/logo', '/console', '/favicon.ico', '/chat', '/cdn-cgi'],
     createProxyMiddleware({
       target: 'https://udify.app',
       changeOrigin: true,
       secure: true,
       pathRewrite: (path, req) => {
         // Fix Next.js static paths if they are requested as /static/css instead of /_next/static/css
-        // This happens if the upstream html refers to them relatively or if we need to map them.
-        // The example code had this, so I will include it to be safe.
         if (path.startsWith('/static/css')) {
             return path.replace('/static/css', '/_next/static/css');
         }
@@ -20,12 +18,32 @@ module.exports = function(app) {
         return path;
       },
       onProxyReq: (proxyReq, req, res) => {
-        // Remove accept-encoding to prevent compression, in case we need to debug or if it causes issues with the proxy
-        // proxyReq.removeHeader('accept-encoding'); 
-        // logic from example, but usually not strictly needed unless modifying response. 
-        // I'll leave it out for simplicity unless issues arise.
+        // Remove accept-encoding to prevent compression issues
+        proxyReq.removeHeader('accept-encoding');
       },
-      logLevel: 'debug'
+      onProxyRes: (proxyRes, req, res) => {
+        // Remove CSP to avoid console errors and allow style injection
+        delete proxyRes.headers['content-security-policy'];
+        delete proxyRes.headers['content-security-policy-report-only'];
+
+        // Add aggressive caching for static assets
+        const path = req.url;
+
+        if (path.includes('/_next/static/') ||
+            path.includes('.js') ||
+            path.includes('.css') ||
+            path.includes('.woff') ||
+            path.includes('.woff2')) {
+          // Cache static assets for 1 hour
+          proxyRes.headers['cache-control'] = 'public, max-age=3600, immutable';
+          console.log(`[Cache] Setting aggressive cache for: ${path}`);
+        } else if (path.includes('/chat/')) {
+          // Cache chat HTML for 5 minutes
+          proxyRes.headers['cache-control'] = 'public, max-age=300';
+          console.log(`[Cache] Setting moderate cache for: ${path}`);
+        }
+      },
+      logLevel: 'silent' // Reduce console noise
     })
   );
 };
