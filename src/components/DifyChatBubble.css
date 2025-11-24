@@ -66,8 +66,8 @@
 
 /* Custom Button Styles */
 .migo-custom-button {
-    background: linear-gradient(135deg, #a855f7, #3b82f6) !important;
-    box-shadow: 0 4px 14px 0 rgba(168, 85, 247, 0.39) !important;
+    background: #ffffff !important;
+    box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.15) !important;
     display: flex;
     justify-content: center;
     align-items: center;

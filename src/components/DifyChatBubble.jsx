@@ -438,7 +438,7 @@ const DifyChatBubble = () => {
       </div>
 
       <FloatButton
-        icon={isOpen ? <CloseIcon size={24} /> : <img src="/migo-logo.png" alt="Migo" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />}
+        icon={isOpen ? <CloseIcon size={24} color="#a855f7" /> : <img src="/migo-logo-removebg-preview.png" alt="Migo" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />}
         onClick={toggleChat}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
