@@ -1,0 +1,37 @@
+{
+  "rewrites": [
+    {
+      "source": "/chat/:match*",
+      "destination": "https://udify.app/chat/:match*"
+    },
+    {
+      "source": "/api/:match*",
+      "destination": "https://udify.app/api/:match*"
+    },
+    {
+      "source": "/_next/:match*",
+      "destination": "https://udify.app/_next/:match*"
+    },
+    {
+      "source": "/logo/:match*",
+      "destination": "https://udify.app/logo/:match*"
+    },
+    {
+      "source": "/console/:match*",
+      "destination": "https://udify.app/console/:match*"
+    },
+    {
+      "source": "/cdn-cgi/:match*",
+      "destination": "https://udify.app/cdn-cgi/:match*"
+    },
+    {
+      "source": "/favicon.ico",
+      "destination": "https://udify.app/favicon.ico"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
+
