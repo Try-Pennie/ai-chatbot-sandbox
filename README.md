@@ -2,7 +2,7 @@
 
 This repository demonstrates a **production-ready, fully customized** integration of the Dify AI chatbot. It serves as a reference implementation for developers looking to move beyond the standard Dify embed script to a branded, high-performance chat experience.
 
-## 🎯 The Goal
+## The Goal
 
 We started with the standard Dify embed code (below), which offers limited customization:
 
@@ -22,7 +22,7 @@ We started with the standard Dify embed code (below), which offers limited custo
 2.  **Performance**: Eliminate the ~1.5s delay when opening the chat.
 3.  **UX Control**: Allow resizing, dragging, and custom error handling.
 
-## 🚀 What We Built
+## What We Built
 
 We replaced the script tag with a custom React application (`src/components/DifyChatBubble.jsx`) that wraps the Dify iframe. This allows us to:
 
@@ -30,10 +30,10 @@ We replaced the script tag with a custom React application (`src/components/Dify
 2.  **Preload Aggressively**: The iframe loads in the background (invisible) 1 second after page load, making the "Open" action instant.
 3.  **Handle Network Issues**: Built-in auto-retry and offline detection.
 
-## 🛠 Technical Implementation (How it Works)
+## Technical Implementation (How it Works)
 
 ### 1. The Proxy (Critical for Style Injection)
-**⚠️ Important**: You cannot inject CSS into an iframe from a different domain (e.g., `your-site.com` -> `udify.app`) due to browser security policies (CORS).
+**Important**: You cannot inject CSS into an iframe from a different domain (e.g., `your-site.com` -> `udify.app`) due to browser security policies (CORS).
 
 To bypass this, we use a **proxy** in development (`src/setupProxy.js`) to make the chat URL appear "local":
 *   **Browser requests**: `http://localhost:3000/chat/...`
@@ -41,7 +41,7 @@ To bypass this, we use a **proxy** in development (`src/setupProxy.js`) to make 
 
 This tricks the browser into thinking the iframe is Same-Origin, allowing us to access `iframe.contentDocument` and inject our custom `<style>` block.
 
-**👉 For Production**: You must replicate this proxy behavior on your server (Nginx, Vercel Rewrites, CloudFront Functions, or a Next.js API route). **If you deploy this as a static site without a proxy, the custom branding inside the chat window will fail.**
+**For Production**: You must replicate this proxy behavior on your server (Nginx, Vercel Rewrites, CloudFront Functions, or a Next.js API route). **If you deploy this as a static site without a proxy, the custom branding inside the chat window will fail.**
 
 ### 2. Style Injection
 In `src/components/DifyChatBubble.jsx`, the `injectStyles` function runs as soon as the iframe loads:
@@ -68,7 +68,7 @@ const injectStyles = (iframe) => {
 *   `FloatButton.jsx`: The branded toggle button (Migo logo).
 *   `setupProxy.js`: The dev-server middleware that enables cross-origin style injection.
 
-## 💻 Customization Guide for Developers
+## Customization Guide for Developers
 
 ### 1. Changing the Chatbot
 Open `src/components/DifyChatBubble.jsx` and update the URL constant.
@@ -121,7 +121,7 @@ const getChatUrl = (leadId) => {
 };
 ```
 
-## ⚡ Performance Stats
+## Performance Stats
 
 | Metric | Standard Embed | Our Custom Widget |
 |--------|---------------|-------------------|
