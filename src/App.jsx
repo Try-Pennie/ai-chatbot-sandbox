@@ -1,17 +1,16 @@
-import React, { lazy, Suspense } from 'react';
+import React from 'react';
 import ErrorBoundary from './components/ErrorBoundary';
 
-// Lazy load the chat bubble for better initial load performance
-const DifyChatBubble = lazy(() => import('./components/DifyChatBubble'));
+// Load the chat bubble immediately instead of lazy loading
+import DifyChatBubble from './components/DifyChatBubble';
 
 const App = () => {
   return (
     <div>
       <h1>Pennie AI Playground</h1>
       <ErrorBoundary>
-        <Suspense fallback={null}>
-          <DifyChatBubble />
-        </Suspense>
+        {/* Removed Suspense wrapper since we are no longer lazy loading */}
+        <DifyChatBubble />
       </ErrorBoundary>
     </div>
   );

@@ -23,7 +23,8 @@ const MAX_RETRIES = 3;
 
 const DifyChatBubble = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isPreloaded, setIsPreloaded] = useState(false);
+  // Start preloading immediately on mount
+  const [isPreloaded, setIsPreloaded] = useState(true);
   const [size, setSize] = useState({ width: DEFAULT_WIDTH, height: DEFAULT_HEIGHT });
   const [iframeError, setIframeError] = useState(false);
   const [iframeLoading, setIframeLoading] = useState(false);
@@ -367,19 +368,7 @@ const DifyChatBubble = () => {
     document.addEventListener('mouseup', handleMouseUp);
   };
 
-  // AGGRESSIVE PRELOADING: Start immediately after component mount
-  // This loads the iframe in the background as soon as the page loads
-  useEffect(() => {
-    // Wait 1 second after page load to not block initial render
-    const timer = setTimeout(() => {
-      console.log('Starting aggressive iframe preload');
-      setIsPreloaded(true);
-    }, 1000);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  // Removed handlePreloadLoad as we use the main handleIframeLoad now
+  // Removed the AGGRESSIVE PRELOADING useEffect with setTimeout since we now preload by default
 
   // Preload on hover as well (in case it hasn't started yet)
   const handleMouseEnter = useCallback(() => {
